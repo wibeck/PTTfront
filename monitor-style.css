@@ -1,0 +1,8 @@
+iframe {
+	height:1000px;
+	width: 1000px;
+}
+
+#hint, #quizButton, #quiz {
+	display:none;
+}
