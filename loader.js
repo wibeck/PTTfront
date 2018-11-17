@@ -34,7 +34,7 @@
 	       }
 	    };
 	    
-		request.open("GET","http://localhost:8080/Hintservice4/hints/hint/" + testId + "/" + taskId,true);
+		request.open("GET","http://localhost:8330/Hintservice4/hints/hint/" + testId + "/" + taskId,true);
 		request.send();
 	}
 	
@@ -48,7 +48,7 @@
 	       }
 	    };
 	    
-		request.open("GET","http://localhost:8080/QuestionService/service/get/questions/" 
+		request.open("GET","http://localhost:8330/QuestionService/service/get/questions/" 
 		+ testId + "/" + taskId,true);
 		request.send();
 		
@@ -59,7 +59,7 @@
 	       }
 	    };
 	    
-		request2.open("GET","http://localhost:8080/QuestionService/service/get/answers/" 
+		request2.open("GET","http://localhost:8330/QuestionService/service/get/answers/" 
 		+ testId + "/" + taskId,true);
 		request2.send();
 		
@@ -69,7 +69,7 @@
 				preEvent += this.responseText;
 	       }
 	    };  
-		request3.open("GET","http://localhost:8080/QuestionService/service/get/preEvent/" 
+		request3.open("GET","http://localhost:8330/QuestionService/service/get/preEvent/" 
 		+ testId + "/" + taskId,true);
 		request3.send();
 			setTaskType();

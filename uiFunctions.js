@@ -4,7 +4,7 @@
 		 "click " + "cancel " + "0 " + " - " + totalTime;
 		window.document.cookie = "finishStatus=cancelled;path=/";
 		sendData();
-		window.location.replace("http://localhost:8080/PTT2/finish");
+		window.location.replace("http://localhost:8330/PTT2/finish");
 
 	}
 	

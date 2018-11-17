@@ -45,12 +45,12 @@
 		var iframe = window.document.getElementById("monitor");
 		var idoc = iframe.contentDocument;
 		
-		iframe.contentDocument.addEventListener("click",function(event){
+		iframe.contentWindow.addEventListener("click",function(event){
 			var ipar = iframe.contentWindow;
 			var el = event.target;
 			var info = event.type + " " + event.target.tagName + " " + indexOf(el, idoc.getElementsByTagName(event.target.tagName)) + " " + iframe.contentDocument.URL;
 			ipar.parent.postMessage(info, entryPoint);
-			document.getElementById("res").innerHTML += info;
+			
 		});
 		
 	}
@@ -98,7 +98,7 @@
 	
 	function sendData(){
 		var request = new XMLHttpRequest(); 
-		request.open("POST","http://localhost:8080/PTT2/save",false);
+		request.open("POST","http://localhost:8330/PTT2/save",false);
 		request.send(log);
 	}
 	
@@ -168,6 +168,6 @@
 				document.getElementById("hint").style.display = "none";
 				sendData();
 				document.cookie = "finishStatus=completed;path=/";
-				window.location.replace("http://localhost:8080/PTT2/finish");
+				window.location.replace("http://localhost:8330/PTT2/finish");
 	}
 	
