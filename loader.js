@@ -25,13 +25,17 @@
 		var request = new XMLHttpRequest();  
 	    request.onreadystatechange = function() {
 	        if (this.readyState == 4 && this.status == 200) {
-	        	
 	        	var buf = this.responseText.split(";");
 	        	var i = 0;
 				for( i = 0; i < buf.length; i++) {
 	    			mileStones[i]=buf[i];
 	    		}
-	       }
+	       } else {
+			   if(this.readyState == 4 && this.status >= 400) {
+				 window.location.replace("http://localhost:8330/html-files/testNotAvailable.html");  
+			   }
+		   }
+		   
 	    };
 	    
 		request.open("GET","http://localhost:8330/Hintservice4/hints/hint/" + testId + "/" + taskId,true);
@@ -45,7 +49,11 @@
 	        if (this.readyState == 4 && this.status == 200) {
 	        	document.getElementById("quizForm").innerHTML  = this.responseText + 
 				"<button onclick=\"checkConstraints()\" >check answers</button>";
-	       }
+	       }else {
+			   if(this.readyState == 4 && this.status >= 400) {
+				 window.location.replace("http://localhost:8330/html-files/testNotAvailable.html");  
+			   }
+		   }
 	    };
 	    
 		request.open("GET","http://localhost:8330/QuestionService/service/get/questions/" 
@@ -56,7 +64,11 @@
 	    request2.onreadystatechange = function() {
 	        if (this.readyState == 4 && this.status == 200) {
 	    			answers+=this.responseText;
-	       }
+	       }else {
+			   if(this.readyState == 4 && this.status >= 400) {
+				 window.location.replace("http://localhost:8330/html-files/testNotAvailable.html");  
+			   }
+		   }
 	    };
 	    
 		request2.open("GET","http://localhost:8330/QuestionService/service/get/answers/" 
@@ -67,7 +79,11 @@
 	    request3.onreadystatechange = function() {
 	        if (this.readyState == 4 && this.status == 200) {
 				preEvent += this.responseText;
-	       }
+	       } else {
+			   if(this.readyState == 4 && this.status >= 400) {
+				 window.location.replace("http://localhost:8330/html-files/testNotAvailable.html");  
+			   }
+		   }
 	    };  
 		request3.open("GET","http://localhost:8330/QuestionService/service/get/preEvent/" 
 		+ testId + "/" + taskId,true);
