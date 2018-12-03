@@ -3,6 +3,7 @@
 	var mileStones = [];
 	var taskType = "";
 	var log = "";
+	var log2 = "";
 	var answers = "";
 	var retrievalStatus = false;
 	var preEvent="";
@@ -48,7 +49,8 @@
 		iframe.contentWindow.addEventListener("click",function(event){
 			var ipar = iframe.contentWindow;
 			var el = event.target;
-			var info = event.type + " " + event.target.tagName + " " + indexOf(el, idoc.getElementsByTagName(event.target.tagName)) + " " + iframe.contentDocument.URL;
+			var info = "{ \"event\":\"" + event.type + "\", " + "\"element\":\"" 
+			+ event.target.tagName + "\", " + "\"elementIndex\":" + indexOf(el, idoc.getElementsByTagName(event.target.tagName)) + ", \"url\":\"" + iframe.contentDocument.URL + "\", ";
 			ipar.parent.postMessage(info, entryPoint);
 			
 		});
@@ -64,17 +66,21 @@
 	function receiveMessage(event) {
 	
 		if(!stopped) {
-			log += event.data + " " + totalTime + "<br>";
-			recentActivity = event.data; 
+			log += event.data + "\"time\":" + totalTime + "}<br>";
+			
+			recentActivity = event.data + " \"time\":" + totalTime + "}"; 
+			var recAc = JSON.parse(recentActivity);
+			var checkString = recAc.event + " " + recAc.element + " " +recAc.elementIndex +  " " + recAc.url;
+			log2 +=checkString;
 			var preEventReached = (log.includes(preEvent));
 			
 			
 			
-			if(log.includes(preEvent) && taskType == "RETRIEVAL") {
+			if(log2.includes(preEvent) && taskType == "RETRIEVAL") {
 				document.getElementById("quizButton").style.display="block";
 			}
 
-			if( recentActivity == mileStones[mileStones.length -1] && retrievalStatus ) {
+			if( checkString == mileStones[mileStones.length -1] && retrievalStatus ) {
 				
 				finishTest();
 			} else {
